@@ -1,7 +1,6 @@
 import { ChatBubbleLeftRightIcon, PhoneIcon } from "@heroicons/react/24/solid";
 
 const Header = ({ chat }) => {
-  console.log("🚀 ~ file: Header.jsx:4 ~ Header ~ chat:", chat);
   return (
     <div className="chat-header">
       <div className="flexbetween">
