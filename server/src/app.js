@@ -3,7 +3,7 @@ import bodyParcer from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import { OPEN_API_KEY } from "./config.js";
+import openaiRoutes from "./routes/openai.routes.js";
 
 // CONFIG SERVER //
 const app = express();
@@ -15,5 +15,8 @@ app.use(morgan("common"));
 app.use(bodyParcer.json({ limit: "30mb", extended: true }));
 app.use(bodyParcer.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+// CONFIGURATIONS ROUTES //
+app.use("/openai", openaiRoutes);
 
 export default app;
