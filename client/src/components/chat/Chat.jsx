@@ -4,7 +4,7 @@ import {
   MultiChatWindow,
 } from "react-chat-engine-advanced";
 
-import { Header, StandarMessageForm } from "..";
+import { Ai, Header, StandarMessageForm } from "..";
 
 const Chat = () => {
   const chatProps = useMultiChatLogic(
@@ -20,6 +20,9 @@ const Chat = () => {
         style={{ height: "100vh" }}
         renderChatHeader={(chat) => <Header chat={chat} />}
         renderMessageForm={(props) => {
+          if (chatProps.chat?.title.startsWith("AiChat_")) {
+            return <Ai props={props} activeChat={chatProps.chat} />;
+          }
           return (
             <StandarMessageForm props={props} activeChat={chatProps.chat} />
           );
