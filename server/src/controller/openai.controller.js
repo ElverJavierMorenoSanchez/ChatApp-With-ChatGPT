@@ -67,3 +67,24 @@ export const sendCode = async (req, res) => {
     res.status(504).json({ message: error.message });
   }
 };
+
+export const sendAssist = async (req, res) => {
+  try {
+    const { text } = req.body;
+
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Finish my thought: ${text}`,
+      temperature: 0.5,
+      max_tokens: 1024,
+      top_p: 1,
+      frequency_penalty: 0.5,
+      presence_penalty: 0,
+    });
+
+    res.status(200).json({ text: response.data.choices[0].text });
+  } catch (error) {
+    console.log(error);
+    res.status(504).json({ message: error.message });
+  }
+};
