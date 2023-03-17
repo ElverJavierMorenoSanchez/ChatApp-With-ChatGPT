@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import openaiRoutes from "./routes/openai.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 // CONFIG SERVER //
 const app = express();
@@ -18,5 +19,6 @@ app.use(cors());
 
 // CONFIGURATIONS ROUTES //
 app.use("/openai", openaiRoutes);
+app.use("/auth", authRoutes);
 
 export default app;
