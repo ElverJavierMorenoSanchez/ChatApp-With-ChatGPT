@@ -4,13 +4,13 @@ import {
   MultiChatWindow,
 } from "react-chat-engine-advanced";
 
-import { Ai, Header, StandarMessageForm, AiCode } from "..";
+import { Ai, Header, StandarMessageForm, AiCode, AiAssist } from "..";
 
-const Chat = () => {
+const Chat = ({ user, secret }) => {
   const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
-    "admin",
-    "1234"
+    user,
+    secret
   );
   return (
     <div style={{ flexBasis: "100%" }}>
@@ -25,6 +25,9 @@ const Chat = () => {
           }
           if (chatProps.chat?.title.startsWith("AiCode_")) {
             return <AiCode props={props} activeChat={chatProps.chat} />;
+          }
+          if (chatProps.chat?.title.startsWith("AiAssist_")) {
+            return <AiAssist props={props} activeChat={chatProps.chat} />;
           }
           return (
             <StandarMessageForm props={props} activeChat={chatProps.chat} />
