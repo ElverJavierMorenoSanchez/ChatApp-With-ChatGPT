@@ -28,7 +28,7 @@ const AiAssist = ({ props, activeChat }) => {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     const date = new Date()
       .toISOString()
       .replace("T", " ")
@@ -62,12 +62,16 @@ const AiAssist = ({ props, activeChat }) => {
   }, [debouncedValue]); // eslint-disable-line
 
   const handleKeyDown = (e) => {
-    if (e.keyCode === 9 || e.keyCode === 13) {
+    if (e.keyCode === 9) {
       e.preventDefault();
       setMessage(`${message} ${appendText}`);
     }
 
     setAppendText("");
+
+    if (e.keyCode === 13) {
+      handleSubmit();
+    }
   };
 
   useEffect(() => {

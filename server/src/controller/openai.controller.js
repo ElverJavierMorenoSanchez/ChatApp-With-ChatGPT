@@ -9,7 +9,7 @@ export const sendMessage = async (req, res) => {
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "system", content: "You are a helpful assistant." }, // this represents the bot and what role they will assume
+        { role: "system", content: "You are a helpful assistant." },
         { role: "user", content: text },
       ],
     });
@@ -51,7 +51,7 @@ export const sendCode = async (req, res) => {
 
     await axios.post(
       `https://api.chatengine.io/chats/${activeChatId}/messages/`,
-      { text: response.data.choices[0].text },
+      { text: response.data.choices[0].message.content },
       {
         headers: {
           "Project-ID": PROJECT_ID,
@@ -61,7 +61,7 @@ export const sendCode = async (req, res) => {
       }
     );
 
-    res.status(200).json({ text: response.data.choices[0].text });
+    res.status(200).json({ text: response.data.choices[0].message.content });
   } catch (error) {
     console.log(error);
     res.status(504).json({ message: error.message });
@@ -84,7 +84,7 @@ export const sendAssist = async (req, res) => {
       ],
     });
 
-    res.status(200).json({ text: response.data.choices[0].text });
+    res.status(200).json({ text: response.data.choices[0].message.content });
   } catch (error) {
     console.log(error);
     res.status(504).json({ message: error.message });
